@@ -1,24 +1,24 @@
 # pylint: disable=line-too-long, no-member
 
-import importlib
-import json
-import mimetypes
-import time
-
-from io import BytesIO
-
-import requests
-
-from django.conf import settings
-from django.core import files
+# import importlib
+# import json
+# import mimetypes
+# import time
+#
+# from io import BytesIO
+#
+# import requests
+#
+# from django.conf import settings
+# from django.core import files
 from django.http import HttpResponse
-from django.utils import timezone
+# from django.utils import timezone
+#
+# from simple_messaging.models import IncomingMessage, IncomingMessageMedia
 
-from simple_messaging.models import IncomingMessage, IncomingMessageMedia
+def process_outgoing_message(outgoing_message): # pylint: disable=unused-argument
+	# Implement Azure code for sending message
 
-def process_outgoing_message(outgoing_message):
-	# TODO: Implement Azure code for sending message
-	
     #metadata = {}
 
     #if hasattr(settings, 'SIMPLE_MESSAGING_TWILIO_CLIENT_ID') and hasattr(settings, 'SIMPLE_MESSAGING_TWILIO_AUTH_TOKEN'):
@@ -44,7 +44,7 @@ def process_outgoing_message(outgoing_message):
 
     return None
 
-def process_incoming_request(request): # pylint: disable=too-many-locals, too-many-branches, too-many-statements
+def process_incoming_request(request): # pylint: disable=unused-argument
     response = '<?xml version="1.0" encoding="UTF-8" ?><Response>'
 
     # responses = []

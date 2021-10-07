@@ -16,12 +16,10 @@ from django.utils import timezone
 from simple_messaging.models import IncomingMessage, OutgoingMessage, encrypt_value
 
 def process_outgoing_message(outgoing_message):
-    metadata = {}
+    transmission_metadata = {}
 
     if hasattr(settings, 'AZURE_MESSAGING_CONNECTION_STRING') and hasattr(settings, 'AZURE_MESSAGING_PHONE_NUMBER')  and hasattr(settings, 'AZURE_MESSAGING_ENABLE_DELIVERY_REPORT'):
         sms_client = SmsClient.from_connection_string(settings.AZURE_MESSAGING_CONNECTION_STRING)
-
-        transmission_metadata = {}
 
         if outgoing_message.transmission_metadata is not None:
             transmission_metadata = json.loads(outgoing_message.transmission_metadata)
@@ -29,14 +27,16 @@ def process_outgoing_message(outgoing_message):
         if outgoing_message.message.startswith('image:'):
             pass
         else:
-            sms_responses = sms_client.send(from_=settings.AZURE_MESSAGING_PHONE_NUMBER, to=outgoing_message.current_destination(), message=outgoing_message.fetch_message(transmission_metadata), enable_delivery_report=settings.AZURE_MESSAGING_ENABLE_DELIVERY_REPORT)
+            message = outgoing_message.fetch_message(transmission_metadata)
+
+            sms_responses = sms_client.send(from_=settings.AZURE_MESSAGING_PHONE_NUMBER, to=outgoing_message.current_destination(), message=message, enable_delivery_report=settings.AZURE_MESSAGING_ENABLE_DELIVERY_REPORT)
 
             for result in sms_responses:
-                metadata['azure_message_id'] = result.message_id
-                metadata['azure_successful'] = result.successful
-                metadata['azure_error_message'] = result.error_message
+                transmission_metadata['azure_message_id'] = result.message_id
+                transmission_metadata['azure_successful'] = result.successful
+                transmission_metadata['azure_error_message'] = result.error_message
 
-        return metadata
+        return transmission_metadata
 
     return None
 

@@ -127,7 +127,7 @@ def process_incoming_request(request): # pylint: disable=too-many-locals, too-ma
 
                     metadata['azure_delivery_report'] = data
 
-                    if metadata['azure_delivery_report'].get('deliveryStatus', 'Unknown') != 'Delivered':
+                    if metadata['azure_delivery_report'].get('deliveryStatus', 'Unknown') != 'Delivered': # pylint: disable=simplifiable-if-statement
                         match.errored = True
                     else:
                         match.errored = False

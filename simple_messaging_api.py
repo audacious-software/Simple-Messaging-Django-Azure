@@ -127,6 +127,11 @@ def process_incoming_request(request): # pylint: disable=too-many-locals, too-ma
 
                     metadata['azure_delivery_report'] = data
 
+                    if metadata['azure_delivery_report'].get('deliveryStatus', 'Unknown') != 'Delivered':
+                        match.errored = True
+                    else:
+                        match.errored = False
+
                     match.transmission_metadata = json.dumps(metadata, indent=2)
                     match.save()
 

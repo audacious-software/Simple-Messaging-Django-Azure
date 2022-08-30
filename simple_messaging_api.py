@@ -51,7 +51,7 @@ def process_incoming_request(request): # pylint: disable=too-many-locals, too-ma
                 response_payload['validationResponse'] = event['data']['validationCode']
 
             if 'validationUrl' in event['data']:
-                requests.get(event['data']['validationUrl'])
+                requests.get(event['data']['validationUrl'], timeout=120)
 
             if event['eventType'] == 'Microsoft.Communication.SMSReceived':
                 responses = []

@@ -15,7 +15,7 @@ SECRET_KEY = 'foobar' # nosec
 DEBUG = False
 ADMINS = [('Chris Karr', 'chris@audacious-software.com')]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['example.com']
 
 # Application definition
 
@@ -91,12 +91,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+SILENCED_SYSTEM_CHECKS = ['simple_messaging.W002']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(BASE_DIR) + '/media/'
 
 AZURE_MESSAGING_CONNECTION_STRING = 'changeme' # nosec
 AZURE_MESSAGING_PHONE_NUMBER = '+15556667777'

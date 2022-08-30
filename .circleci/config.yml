@@ -44,6 +44,7 @@ jobs:
             git clone https://github.com/audacious-software/Simple-Messaging-Django.git simple_messaging
             cp simple_messaging_azure/circle_settings.py sm/settings.py
             cp simple_messaging_azure/circle_urls.py sm/urls.py
+            mkdir -p media/incoming_message_media
             python manage.py migrate
             python manage.py test
             cp simple_messaging/.pylintrc .
@@ -94,6 +95,7 @@ jobs:
             git clone https://github.com/audacious-software/Simple-Messaging-Django.git simple_messaging
             cp simple_messaging_azure/circle_settings.py sm/settings.py
             cp simple_messaging_azure/circle_urls.py sm/urls.py
+            mkdir -p media/incoming_message_media
             python manage.py migrate
             python manage.py test
             cp simple_messaging/.pylintrc .

@@ -52,7 +52,10 @@ def process_outgoing_message(outgoing_message, metadata=None): # pylint: disable
         sms_client = SmsClient.from_connection_string(azure_connection_string)
 
         if outgoing_message.transmission_metadata is not None:
-            transmission_metadata = json.loads(outgoing_message.transmission_metadata)
+            try:
+                transmission_metadata = json.loads(outgoing_message.transmission_metadata)
+            except json.decoder.JSONDecodeError:
+                transmission_metadata = {}
 
         if outgoing_message.message.startswith('image:'):
             pass

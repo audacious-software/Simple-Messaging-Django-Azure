@@ -14,7 +14,7 @@ jobs:
   build-39:
     docker:
       - image: cimg/python:3.9
-      - image: cimg/postgres:9.6-postgis
+      - image: cimg/postgres:12.18-postgis
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -42,7 +42,9 @@ jobs:
             mv ../simple_messaging_azure sm
             cd sm
             git clone https://github.com/audacious-software/Quicksilver-Django.git quicksilver
+            pip install -r quicksilver/requirements.txt --progress-bar off
             git clone https://github.com/audacious-software/Simple-Messaging-Django.git simple_messaging
+            pip install -r simple_messaging/requirements.txt --progress-bar off
             cp simple_messaging_azure/circle_settings.py sm/settings.py
             cp simple_messaging_azure/circle_urls.py sm/urls.py
             mkdir -p media/incoming_message_media
@@ -66,7 +68,7 @@ jobs:
   build-38:
     docker:
       - image: cimg/python:3.8
-      - image: cimg/postgres:9.6-postgis
+      - image: cimg/postgres:12.18-postgis
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -94,7 +96,9 @@ jobs:
             mv ../simple_messaging_azure sm
             cd sm
             git clone https://github.com/audacious-software/Quicksilver-Django.git quicksilver
+            pip install -r quicksilver/requirements.txt --progress-bar off
             git clone https://github.com/audacious-software/Simple-Messaging-Django.git simple_messaging
+            pip install -r simple_messaging/requirements.txt --progress-bar off
             cp simple_messaging_azure/circle_settings.py sm/settings.py
             cp simple_messaging_azure/circle_urls.py sm/urls.py
             mkdir -p media/incoming_message_media
@@ -146,7 +150,9 @@ jobs:
             mv ../simple_messaging_azure sm
             cd sm
             git clone https://github.com/audacious-software/Quicksilver-Django.git quicksilver
+            pip install -r quicksilver/requirements.txt --progress-bar off
             git clone https://github.com/audacious-software/Simple-Messaging-Django.git simple_messaging
+            pip install -r simple_messaging/requirements.txt --progress-bar off
             cp simple_messaging_azure/circle_settings.py sm/settings.py
             cp simple_messaging_azure/circle_urls.py sm/urls.py
             mkdir -p media/incoming_message_media

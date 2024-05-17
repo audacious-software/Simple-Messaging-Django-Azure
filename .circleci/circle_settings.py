@@ -43,7 +43,7 @@ MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'simple_messaging_azure.circle_urls'
+ROOT_URLCONF = 'sm.urls
 
 TEMPLATES = [
     {

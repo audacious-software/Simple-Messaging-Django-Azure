@@ -33,7 +33,7 @@ jobs:
             python3 -m venv /home/circleci/venv
             . /home/circleci/venv/bin/activate
             pip install --upgrade pip
-            pip install -r requirements.txt --progress-bar off
+            pip install -r requirements.txt
             cd ..
             mv project simple_messaging_azure
             mkdir django
@@ -42,19 +42,23 @@ jobs:
             mv ../simple_messaging_azure sm
             cd sm
             git clone https://github.com/audacious-software/Quicksilver-Django.git quicksilver
-            pip install -r quicksilver/requirements.txt --progress-bar off
+            pip install -r quicksilver/requirements.txt
             git clone https://github.com/audacious-software/Simple-Messaging-Django.git simple_messaging
-            pip install -r simple_messaging/requirements.txt --progress-bar off
-            cp simple_messaging_azure/circle_settings.py sm/settings.py
-            cp simple_messaging_azure/circle_urls.py sm/urls.py
+            pip install -r simple_messaging/requirements.txt
+            git clone https://github.com/audacious-software/Simple-Dashboard-Django.git simple_dashboard
+            pip install -r simple_dashboard/requirements.txt
+            cp simple_messaging_azure/.circleci/circle_settings.py sm/settings.py
+            cp simple_messaging_azure/.circleci/circle_urls.py sm/urls.py
             mkdir -p media/incoming_message_media
             mkdir -p media/outgoing_message_media
             python manage.py migrate
+            python manage.py install_quicksilver_tasks
+            python manage.py simple_dashboard_update_values
             python manage.py test
             cp simple_messaging/.pylintrc .
             pylint simple_messaging
             pylint simple_messaging_azure
-            bandit -r .      
+            bandit -r .
       - save_cache:
           key: venv-38-{{ .Branch }}-{{ checksum "/home/circleci/django/sm/simple_messaging_azure/requirements.txt" }}
           paths:
@@ -64,7 +68,7 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: python_app
-          
+
   build-38:
     docker:
       - image: cimg/python:3.8
@@ -87,7 +91,7 @@ jobs:
             python3 -m venv /home/circleci/venv
             . /home/circleci/venv/bin/activate
             pip install --upgrade pip
-            pip install -r requirements.txt --progress-bar off
+            pip install -r requirements.txt
             cd ..
             mv project simple_messaging_azure
             mkdir django
@@ -96,19 +100,23 @@ jobs:
             mv ../simple_messaging_azure sm
             cd sm
             git clone https://github.com/audacious-software/Quicksilver-Django.git quicksilver
-            pip install -r quicksilver/requirements.txt --progress-bar off
+            pip install -r quicksilver/requirements.txt
             git clone https://github.com/audacious-software/Simple-Messaging-Django.git simple_messaging
-            pip install -r simple_messaging/requirements.txt --progress-bar off
-            cp simple_messaging_azure/circle_settings.py sm/settings.py
-            cp simple_messaging_azure/circle_urls.py sm/urls.py
+            pip install -r simple_messaging/requirements.txt
+            git clone https://github.com/audacious-software/Simple-Dashboard-Django.git simple_dashboard
+            pip install -r simple_dashboard/requirements.txt
+            cp simple_messaging_azure/.circleci/circle_settings.py sm/settings.py
+            cp simple_messaging_azure/.circleci/circle_urls.py sm/urls.py
             mkdir -p media/incoming_message_media
             mkdir -p media/outgoing_message_media
             python manage.py migrate
+            python manage.py install_quicksilver_tasks
+            python manage.py simple_dashboard_update_values
             python manage.py test
             cp simple_messaging/.pylintrc .
             pylint simple_messaging
             pylint simple_messaging_azure
-            bandit -r .      
+            bandit -r .
       - save_cache:
           key: venv-38-{{ .Branch }}-{{ checksum "/home/circleci/django/sm/simple_messaging_azure/requirements.txt" }}
           paths:
@@ -141,7 +149,7 @@ jobs:
             virtualenv /home/circleci/venv
             . /home/circleci/venv/bin/activate
             pip install --upgrade pip
-            pip install -r requirements.txt --progress-bar off
+            pip install -r requirements.txt
             cd ..
             mv project simple_messaging_azure
             mkdir django
@@ -150,14 +158,18 @@ jobs:
             mv ../simple_messaging_azure sm
             cd sm
             git clone https://github.com/audacious-software/Quicksilver-Django.git quicksilver
-            pip install -r quicksilver/requirements.txt --progress-bar off
+            pip install -r quicksilver/requirements.txt
             git clone https://github.com/audacious-software/Simple-Messaging-Django.git simple_messaging
-            pip install -r simple_messaging/requirements.txt --progress-bar off
-            cp simple_messaging_azure/circle_settings.py sm/settings.py
-            cp simple_messaging_azure/circle_urls.py sm/urls.py
+            pip install -r simple_messaging/requirements.txt
+            git clone https://github.com/audacious-software/Simple-Dashboard-Django.git simple_dashboard
+            pip install -r simple_dashboard/requirements.txt
+            cp simple_messaging_azure/.circleci/circle_settings.py sm/settings.py
+            cp simple_messaging_azure/.circleci/circle_urls.py sm/urls.py
             mkdir -p media/incoming_message_media
             mkdir -p media/outgoing_message_media
             python manage.py migrate
+            python manage.py install_quicksilver_tasks
+            python manage.py simple_dashboard_update_values
             python manage.py test
             cp simple_messaging/.pylintrc .
             pylint simple_messaging

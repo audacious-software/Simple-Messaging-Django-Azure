@@ -43,7 +43,7 @@ MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'sm.urls
+ROOT_URLCONF = 'sm.urls'
 
 TEMPLATES = [
     {

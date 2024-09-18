@@ -195,5 +195,7 @@ def process_incoming_request(request): # pylint: disable=too-many-locals, too-ma
                     return HttpResponse(json.dumps(response_payload, indent=2), content_type='application/json')
         except json.JSONDecodeError:
             return None
+        except UnicodeDecodeError:
+            return None
 
     return None

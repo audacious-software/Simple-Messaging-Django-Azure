@@ -15,9 +15,9 @@ workflows:
       - build-27
 
 jobs:
-  build-310:
+  build-312:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.12
       - image: cimg/postgres:12.18-postgis
         auth:
           username: mydockerhub-user
@@ -29,7 +29,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: venv-310-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: venv-312-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
           name: Build and validate
           command: |
@@ -64,7 +64,7 @@ jobs:
             pylint simple_messaging_azure
             bandit -r .
       - save_cache:
-          key: venv-310-{{ .Branch }}-{{ checksum "/home/circleci/django/sm/simple_messaging_azure/requirements.txt" }}
+          key: venv-312-{{ .Branch }}-{{ checksum "/home/circleci/django/sm/simple_messaging_azure/requirements.txt" }}
           paths:
             - "/home/circleci/venv"
       - store_test_results:

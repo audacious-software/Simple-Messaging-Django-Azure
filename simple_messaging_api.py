@@ -1,11 +1,10 @@
 # pylint: disable=line-too-long, no-member
 
-from __future__ import print_function
-
 import importlib
 import json
 
 import requests
+import six
 
 from azure.communication.sms import SmsClient
 
@@ -190,7 +189,7 @@ def process_incoming_request(request): # pylint: disable=too-many-locals, too-ma
                             match.transmission_metadata = json.dumps(metadata, indent=2)
                             match.save()
                     else:
-                        print('Unknown event type: ' + event['eventType'])
+                        six.print_('Unknown event type: ' + event['eventType'])
 
                     return HttpResponse(json.dumps(response_payload, indent=2), content_type='application/json')
         except json.JSONDecodeError:

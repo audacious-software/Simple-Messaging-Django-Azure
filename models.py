@@ -8,7 +8,7 @@ def check_azure_settings_defined(app_configs, **kwargs): # pylint: disable=unuse
     errors = []
 
     if 'simple_messaging_switchboard' in settings.INSTALLED_APPS:
-        from simple_messaging_switchboard.models import Channel # pylint: disable=import-outside-toplevel
+        from simple_messaging_switchboard.models import Channel # pylint: disable=import-outside-toplevel, import-error
 
         count = Channel.objects.filter(channel_type__package_name='simple_messaging_azure').count()
 
